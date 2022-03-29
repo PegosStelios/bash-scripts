@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#check that the user is root, if yes install mariadb, else throw error
+# check that the user is root, if yes install mariadb, else throw error
 if [ "$(id -u)" != "0" ]; then
    echo "This script must be run as root" 1>&2
    exit 1
 fi
 
-#ask the user for required stuff
+# ask the user for required stuff
 IFS= read -s  -p "Enter the root password for root user: " rootpass
 
 read -p "Enter the database user: " dbuser
@@ -17,7 +17,7 @@ read -p "Enter the database name: " dbname
 
 echo "Installing packages"
 
-#install mariadb with apt
+# install mariadb with apt
 apt-get update
 apt-get install -y mariadb-server
 
@@ -46,5 +46,5 @@ mysql -u root -e "FLUSH PRIVILEGES"
 # allow remote access to the database
 sed -i "s/^#bind-address            = *.*.*.*/bind-address            = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
 
-#restart the mysql service
+# restart the mysql service
 systemctl restart mysql
