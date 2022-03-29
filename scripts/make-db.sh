@@ -6,7 +6,7 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
-#ask the user requires stuff
+#ask the user for required stuff
 IFS= read -s  -p "Enter the root password for root user: " rootpass
 
 read -p "Enter the database user: " dbuser
@@ -17,7 +17,7 @@ read -p "Enter the database name: " dbname
 
 echo "Installing packages"
 
-#install mariadb
+#install mariadb with apt
 apt-get update
 apt-get install -y mariadb-server
 
